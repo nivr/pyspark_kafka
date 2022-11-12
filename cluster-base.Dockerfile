@@ -12,6 +12,7 @@ RUN mkdir -p ${shared_workspace} && \
 	apt install -y libsqlite3-dev && \
 	apt install -y libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget libjpeg-dev && \
 	apt install -y python3 python3-pip && \
+	pip install py4j && \
     apt-get update && apt-get install -y procps && apt-get install -y vim && apt-get install -y net-tools && \
 	apt-get install -y nano && \
 	rm -rf /var/lib/apt/lists/*

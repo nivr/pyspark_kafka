@@ -1,4 +1,5 @@
 volumes:
+  rstudio-server-data:
   shared-workspace:
     name: "hadoop-distributed-file-system"
     driver: local
@@ -24,7 +25,7 @@ services:
     container_name: spark-worker-1
     environment:
       - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=1024m
+      - SPARK_WORKER_MEMORY=2048m
     ports:
       - 4041:4040
       - 18081:18080
@@ -37,7 +38,7 @@ services:
     container_name: spark-worker-2
     environment:
       - SPARK_WORKER_CORES=1
-      - SPARK_WORKER_MEMORY=1024m
+      - SPARK_WORKER_MEMORY=2048m
     ports:
       - 4042:4040
       - 18082:18080
@@ -220,3 +221,27 @@ services:
       KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+     
+  rstudio-server:
+    container_name: rstudio-server
+    image: rocker/rstudio:latest
+    ports:
+      - 8787:8787
+    volumes:
+      - rstudio-server-data:/home/rstudio
+    working_dir: /home/rstudio
+    entrypoint:
+      - /usr/lib/rstudio-server/bin/rserver
+    command:
+      - --server-daemonize=0
+      - --server-app-armor-enabled=0
+
+  kafdrop:
+    container_name: kafdrop
+    image: obsidiandynamics/kafdrop
+    ports:
+      - 9000:9000
+    environment:
+      KAFKA_BROKERCONNECT: 'broker:29092'
+      JVM_OPTS: '-Xms32M -Xmx64M'
+      SERVER_SERVLET_CONTEXTPATH: '/'
