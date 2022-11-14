@@ -1,0 +1,7 @@
+spark-submit --master spark://spark-master:7077 --num-executors 2 --executor-memory 2G --executor-cores 1 --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.4 pi.py
+
+org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.3
+
+spark-submit --master spark://spark-master:7077 --num-executors 2 --executor-memory 2G --executor-cores 1 --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.3 kafka-example.py
+
+spark-submit --master spark://spark-master:7077 --num-executors 2 --executor-memory 2G --executor-cores 1 --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.3 kafka-example2.py
