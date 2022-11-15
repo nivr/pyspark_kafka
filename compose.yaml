@@ -245,3 +245,9 @@ services:
       KAFKA_BROKERCONNECT: 'broker:29092'
       JVM_OPTS: '-Xms32M -Xmx64M'
       SERVER_SERVLET_CONTEXTPATH: '/'
+  
+  zeppelin:
+    container_name: zeppelin
+    image: apache/zeppelin:0.10.1
+    ports:
+     - 8080:8080
